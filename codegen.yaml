@@ -1,4 +1,5 @@
 schema: http://localhost:4000/api
+documents: ./src/graphql/**/*.graphql
 generates:
   ./src/graphql/generated.ts:
     hooks:

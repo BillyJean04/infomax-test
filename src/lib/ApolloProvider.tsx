@@ -3,7 +3,7 @@ import { ApolloClient, ApolloProvider as Provider, InMemoryCache } from "@apollo
 
 export function ApolloProvider({ children }: { children: ReactNode }) {
     const client = new ApolloClient({
-        uri: "https://localhost:4000/",
+        uri: `${import.meta.env.VITE_API_BASE_URL}/api`,
         cache: new InMemoryCache(),
     });
 

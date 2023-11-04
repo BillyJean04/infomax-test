@@ -2,8 +2,8 @@ import Button from "./ui/Button";
 
 const Header = () => {
     return (
-        <div className="flex flex-row  py-[17px] px-[40px] border-b-gray2 border-[1px]">
-            <div className="container mx-auto flex items-center  justify-between">
+        <div className="flex flex-row py-[17px] px-[40px] border-b-gray2 border-[1px]">
+            <div className="container mx-auto flex items-center justify-between">
                 <div className="flex flex-row gap-[20px]">
                     <img src="/logo.svg" alt="logo" />
                     <Button variant="default" size="sm" className="gap-[8px]">
