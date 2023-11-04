@@ -1,14 +1,17 @@
-import { FC } from "react";
-import Header from "./components/Header";
+import { FC, useRef, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { type GetAllCarsQuery } from "./graphql/generated";
 import GetAllCars from "./graphql/queries/GetAllCars";
+import Header from "./components/Header";
+import SortSelect from "./components/SortSelect";
+import Search from "./components/Search";
 import Card from "./components/Card";
+import { useSortedAndSearched } from "./hooks/useSortedAndSearched";
 
 function convertData(obj: GetAllCarsQuery["cars"]) {
     return obj.map((elem) => ({
         id: elem.id,
-        model: elem.model,
+        model: `${elem.brand} ${elem.model}`,
         modelYear: elem.model_year,
         color: elem.color,
         price: elem.price,
@@ -17,26 +20,34 @@ function convertData(obj: GetAllCarsQuery["cars"]) {
     }));
 }
 const App: FC = () => {
-    const { data, loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
+    const { loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
+    const [updated, setUpdated] = useState<string>("");
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    if (error) {
-        console.log(error.message);
-    }
-
+    const data = useSortedAndSearched(updated);
+    const handleClick = () => {
+        setUpdated(inputRef.current ? inputRef.current.value : "");
+    };
     return (
-        <div className="flex flex-col gap-4 font-inter">
+        <div className="flex flex-col font-inter gap-[56px]">
             <Header />
-            {loading ? (
-                <div className="flex justify-center items-center h-full">Loading</div>
-            ) : (
-                <div className="container mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                    {data ? (
-                        convertData(data.cars).map((props) => <Card key={props.id} {...props} />)
-                    ) : (
-                        <div>Нет доступных автомобилей</div>
-                    )}
+            <div className="container mx-auto flex flex-col gap-[50px]">
+                <div className="flex flex-row items-center justify-between">
+                    <SortSelect />
+                    <Search ref={inputRef} handleClick={handleClick} />
                 </div>
-            )}
+                {loading ? (
+                    <div className="flex justify-center items-center h-full">Loading</div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                        {data ? (
+                            convertData(data).map((props) => <Card key={props.id} {...props} />)
+                        ) : (
+                            <div>Нет доступных автомобилей</div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

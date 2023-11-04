@@ -1,6 +1,7 @@
 import Button from "./ui/Button";
+import { memo } from "react";
 
-const Header = () => {
+const Header = memo(() => {
     return (
         <div className="flex flex-row py-[17px] px-[40px] border-b-gray2 border-[1px]">
             <div className="container mx-auto flex items-center justify-between">
@@ -24,6 +25,6 @@ const Header = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Header;

@@ -25,10 +25,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantPr
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, children, ...props }, ref) => {
     return (
-        <button ref={ref} className={cn(buttonVariants({ variant, size, className }))}>
+        <button ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props}>
             {children}
         </button>
     );
 });
+
+Button.displayName = "Button";
 
 export default Button;

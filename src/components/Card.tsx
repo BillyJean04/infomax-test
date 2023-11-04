@@ -12,7 +12,7 @@ interface CardProps {
 
 const Card: FC<CardProps> = ({ model, modelYear, color, img, price, availability }) => {
     return (
-        <div className="flex flex-col gap-[26px] lg:w-[445px]">
+        <div className="flex justify-center items-center sm:items-start flex-col gap-[26px] lg:w-[445px]">
             <div className="flex relative border-[1px] border-gray2 rounded-t-[15px]">
                 {!availability && (
                     <Button
@@ -22,7 +22,11 @@ const Card: FC<CardProps> = ({ model, modelYear, color, img, price, availability
                         Нет в наличии
                     </Button>
                 )}
-                <img src={img} className={`${availability ? "" : "opacity-30"}`} alt={`${model} img`} />
+                <img
+                    src={img}
+                    className={`${availability ? "w-[400px]" : "opacity-30"} w-[400px]`}
+                    alt={`${model} img`}
+                />
             </div>
             <div className="flex flex-col gap-[20px]">
                 <div className="flex flex-col gap-[12px]">
