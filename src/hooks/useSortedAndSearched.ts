@@ -1,13 +1,43 @@
-import { useQuery } from "@apollo/client";
 import { GetAllCarsQuery } from "../graphql/generated";
-import GetAllCars from "../graphql/queries/GetAllCars";
+import { useMemo } from "react";
 
-export const useSortedAndSearched = (searchQuery: string) => {
-    const { data, loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
+export const useSorted = (data: GetAllCarsQuery["cars"], sortMethod = "") => {
+    return useMemo(() => {
+        switch (sortMethod) {
+            case "available": {
+                return data.sort((a, b) => Number(b.availability) - Number(a.availability));
+            }
+            case "name.asc": {
+                return data.sort((a, b) => a.brand.localeCompare(b.brand));
+            }
+            case "name.desc": {
+                return data.sort((a, b) => b.brand.localeCompare(a.brand));
+            }
+            case "newest": {
+                return data.sort((a, b) => b.model_year - a.model_year);
+            }
+            case "price.asc": {
+                return data.sort((a, b) => Number(a.price.slice(1)) - Number(b.price.slice(1)));
+            }
+            case "price.desc": {
+                return data.sort((a, b) => Number(b.price.slice(1)) - Number(a.price.slice(1)));
+            }
+            default:
+                return data;
+        }
+    }, [sortMethod, data]);
+};
 
-    return data?.cars.filter((item) =>
+export const useSortedAndSearched = (data: GetAllCarsQuery["cars"] = [], sortMethod: string, searchQuery: string) => {
+    const sorted = useSorted(data, sortMethod);
+
+    const filtered = sorted?.filter((item) =>
         Object.values(item).some((value) => {
             return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
         }),
     );
+
+    return {
+        filtered,
+    };
 };
