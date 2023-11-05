@@ -1,61 +1,14 @@
-import { FC, useCallback, useRef, useState } from "react";
-import { type GetAllCarsQuery } from "./graphql/generated";
+import { withProviders } from "./providers";
 import Header from "./components/Header";
-import SortSelect from "./components/SortSelect";
-import Search from "./components/Search";
-import Card from "./components/Card";
-import { useSortedAndSearched } from "./hooks/useSortedAndSearched";
-import { useQuery } from "@apollo/client";
-import GetAllCars from "./graphql/queries/GetAllCars";
+import { Routes } from "./routes";
 
-function convertData(obj: GetAllCarsQuery["cars"]) {
-    return obj.map((elem) => ({
-        id: elem.id,
-        model: `${elem.brand} ${elem.model}`,
-        modelYear: elem.model_year,
-        color: elem.color,
-        price: elem.price,
-        img: `${import.meta.env.VITE_API_BASE_URL}${elem.img_src}`,
-        availability: elem.availability,
-    }));
-}
-const App: FC = () => {
-    const { data, loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
-
-    const [searchQuery, setSearchQuery] = useState<string>("");
-    const [sortMethod, setSortMethod] = useState<string>("");
-    const inputRef = useRef<HTMLInputElement>(null);
-    const handleClick = useCallback(() => {
-        setSearchQuery(inputRef.current ? inputRef.current.value : "");
-    }, []);
-    console.log(sortMethod);
-    const { filtered } = useSortedAndSearched(data?.cars, sortMethod, searchQuery);
-
-    if (error) {
-        console.log(error.message);
-    }
+const App = () => {
     return (
-        <div className="flex flex-col font-inter gap-[56px]">
+        <>
             <Header />
-            <div className="container mx-auto flex flex-col gap-[50px]">
-                <div className="flex flex-row items-center justify-between">
-                    <SortSelect sortMethod={sortMethod} setSortMethod={setSortMethod} />
-                    <Search ref={inputRef} handleClick={handleClick} />
-                </div>
-                {loading ? (
-                    <div className="flex justify-center items-center h-full">Loading</div>
-                ) : (
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                        {filtered ? (
-                            convertData(filtered).map((props) => <Card key={props.id} {...props} />)
-                        ) : (
-                            <div>Нет доступных автомобилей</div>
-                        )}
-                    </div>
-                )}
-            </div>
-        </div>
+            <Routes />
+        </>
     );
 };
 
-export default App;
+export default withProviders(App);
