@@ -21,13 +21,14 @@ function convertData(obj: GetAllCarsQuery["cars"]) {
 
 const Cars = () => {
     const { data, loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
-
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [sortMethod, setSortMethod] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
+
     const handleClick = useCallback(() => {
         setSearchQuery(inputRef.current ? inputRef.current.value : "");
     }, []);
+
     const { filtered } = useSortedAndSearched(data?.cars, sortMethod, searchQuery);
 
     if (error) {

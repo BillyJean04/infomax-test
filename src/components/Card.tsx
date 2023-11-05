@@ -1,7 +1,9 @@
 import { FC } from "react";
 import Button from "./ui/Button";
+import HeartButton from "./HeartButton";
 
 interface CardProps {
+    id: number;
     model: string;
     modelYear: number;
     color: string;
@@ -10,7 +12,7 @@ interface CardProps {
     availability: boolean;
 }
 
-const Card: FC<CardProps> = ({ model, modelYear, color, img, price, availability }) => {
+const Card: FC<CardProps> = ({ id, model, modelYear, color, img, price, availability }) => {
     return (
         <div className="flex justify-center items-center sm:items-start flex-col gap-[26px] lg:w-[445px]">
             <div className="flex relative border-[1px] border-gray2 rounded-t-[15px]">
@@ -41,13 +43,7 @@ const Card: FC<CardProps> = ({ model, modelYear, color, img, price, availability
                     <Button variant={`${availability ? "default" : "secondary"}`} size="default">
                         Купить
                     </Button>
-                    <Button>
-                        <img
-                            className="h-[24px] w-[27px]"
-                            src={`${availability ? "/heart-default.svg" : "/disabled-heart.svg"}`}
-                            alt="heart"
-                        />
-                    </Button>
+                    <HeartButton cardId={id} disabled={!availability} />
                 </div>
             </div>
         </div>
