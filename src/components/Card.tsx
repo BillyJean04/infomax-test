@@ -28,9 +28,9 @@ const Card: FC<CardProps> = ({
 }) => {
     if (isFavorite) {
         return (
-            <div className="flex flex-row gap-[26px] pb-[26px] border-b-[1px] border-gray2 last:border-none last:pb-0">
+            <div className="flex flex-col lg:flex-row gap-[26px] pb-[26px] border-b-[1px] border-gray2 last:border-none last:pb-0">
                 <div className="flex relative border-[1px] border-gray2 rounded-[15px]">
-                    <img className="max-w-[445px]" src={img} alt={`${model} img`} />
+                    <img className="max-full lg:max-w-[445px] rounded-[15px]" src={img} alt={`${model} img`} />
                 </div>
                 <div className={`flex flex-col gap-[20px] justify-between`}>
                     <div className="flex flex-col gap-[16px] max-w-[810px]">

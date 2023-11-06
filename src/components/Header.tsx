@@ -6,7 +6,7 @@ const Header = () => {
         <div className="flex flex-row py-[17px] border-b-gray2 border-[1px] mb-[56px]">
             <div className="container mx-auto flex items-center justify-between">
                 <div className="flex flex-row gap-[20px]">
-                    <Link to="/" className="flex items-center">
+                    <Link to="/" className="hidden sm:flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="134" height="20" fill="none">
                             <path
                                 fill="#000"

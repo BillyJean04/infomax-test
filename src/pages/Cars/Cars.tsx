@@ -27,7 +27,7 @@ const Cars = () => {
     return (
         <div className="flex flex-col font-inter gap-[56px] pb-[40px]">
             <div className="container mx-auto flex flex-col gap-[50px]">
-                <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-col gap-5 sm:flex-row  items-center justify-between">
                     <SortSelect sortMethod={sortMethod} setSortMethod={setSortMethod} />
                     <Search ref={inputRef} handleClick={handleClick} />
                 </div>

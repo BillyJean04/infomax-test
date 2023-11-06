@@ -5,25 +5,25 @@ export const useSorted = (data: GetAllCarsQuery["cars"], sortMethod = "") => {
     return useMemo(() => {
         switch (sortMethod) {
             case "available": {
-                return data.sort((a, b) => Number(b.availability) - Number(a.availability));
+                return [...data].sort((a, b) => Number(b.availability) - Number(a.availability));
             }
             case "name.asc": {
-                return data.sort((a, b) => a.brand.localeCompare(b.brand));
+                return [...data].sort((a, b) => a.brand.localeCompare(b.brand));
             }
             case "name.desc": {
-                return data.sort((a, b) => b.brand.localeCompare(a.brand));
+                return [...data].sort((a, b) => b.brand.localeCompare(a.brand));
             }
             case "newest": {
-                return data.sort((a, b) => b.model_year - a.model_year);
+                return [...data].sort((a, b) => b.model_year - a.model_year);
             }
             case "oldest": {
-                return data.sort((a, b) => a.model_year - b.model_year);
+                return [...data].sort((a, b) => a.model_year - b.model_year);
             }
             case "price.asc": {
-                return data.sort((a, b) => Number(a.price.slice(1)) - Number(b.price.slice(1)));
+                return [...data].sort((a, b) => Number(a.price.slice(1)) - Number(b.price.slice(1)));
             }
             case "price.desc": {
-                return data.sort((a, b) => Number(b.price.slice(1)) - Number(a.price.slice(1)));
+                return [...data].sort((a, b) => Number(b.price.slice(1)) - Number(a.price.slice(1)));
             }
             default:
                 return data;

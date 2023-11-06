@@ -54,10 +54,12 @@ const SortSelect: FC<SortSelectProps> = ({ sortMethod, setSortMethod }) => {
                 onChange={(e) => setSortMethod(e.target.value)}
                 name="cars"
                 id="cars"
-                className="appearance-none cursor-pointer text-h4 leading-h4 focus:outline-0 p-[4px] border-black w-[206px] first:p-0"
+                className="appearance-none  cursor-pointer text-h4 leading-h4 focus:outline-0 p-[4px] border-black w-[206px]"
             >
                 {selectOptions.map(({ value, label }) => (
-                    <option value={value}>{label}</option>
+                    <option key={value} value={value}>
+                        {label}
+                    </option>
                 ))}
             </select>
         </div>
