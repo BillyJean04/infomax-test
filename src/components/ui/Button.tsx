@@ -7,10 +7,12 @@ const buttonVariants = cva("flex items-center justify-center rounded-[5px] trans
         variant: {
             default: "text-white bg-blue2 hover:bg-blue3 active:bg-blue4 leading-h4",
             secondary: "text-black bg-gray2",
+            delete: "border-[2px] border-red1 hover:bg-red1 active:bg-red2 active:border-red2",
         },
         size: {
             default: "px-[99px] py-[19px]",
             sm: "px-[26px] py-[9px]",
+            delete: "p-[19px]",
         },
         defaultVariants: {
             variant: "default",

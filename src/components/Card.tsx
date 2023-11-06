@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Button from "./ui/Button";
 import HeartButton from "./HeartButton";
+import DeleteButton from "./DeleteButton";
 
 interface CardProps {
     id: number;
@@ -10,11 +11,52 @@ interface CardProps {
     price: string;
     img: string;
     availability: boolean;
+    description: string;
+    isFavorite?: boolean;
 }
 
-const Card: FC<CardProps> = ({ id, model, modelYear, color, img, price, availability }) => {
+const Card: FC<CardProps> = ({
+    id,
+    model,
+    modelYear,
+    color,
+    img,
+    price,
+    availability,
+    isFavorite = false,
+    ...props
+}) => {
+    if (isFavorite) {
+        return (
+            <div className="flex flex-row gap-[26px]">
+                <div className="flex relative border-[1px] border-gray2 rounded-[15px]">
+                    <img className="max-w-full" src={img} alt={`${model} img`} />
+                </div>
+                <div className={`flex flex-col gap-[20px] justify-between`}>
+                    <div className="flex flex-col gap-[16px]">
+                        <h3 className="font-medium text-h2 leading-h2">{model}</h3>
+                        <div className="flex flex-col gap-[33px]">
+                            <div className="flex flex-col gap-[16px]">
+                                <p className="text-gray3 text-p leading-p">{props.description}</p>
+                                <p className="text-gray3 text-p leading-p">Год: {modelYear}</p>
+                                <p className="text-gray3 text-p leading-p">Цвет: {color}</p>
+                            </div>
+                            <p className="text-gray4 text-h3 font-medium leading-h3">от {price}</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-row items-center gap-[25px]">
+                        <Button className="px-[34px]" variant="default" size="default">
+                            Выбрать комплектацию
+                        </Button>
+                        <DeleteButton cardId={id} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex justify-center items-center sm:items-start flex-col gap-[26px] lg:w-[445px]">
+        <div className="flex items-center gap-[26px] flex-col justify-center sm:items-start">
             <div className="flex relative border-[1px] border-gray2 rounded-t-[15px]">
                 {!availability && (
                     <Button
@@ -24,11 +66,7 @@ const Card: FC<CardProps> = ({ id, model, modelYear, color, img, price, availabi
                         Нет в наличии
                     </Button>
                 )}
-                <img
-                    src={img}
-                    className={`${availability ? "w-[400px]" : "opacity-30"} w-[400px]`}
-                    alt={`${model} img`}
-                />
+                <img src={img} className={`${availability ? "" : "opacity-30"} w-full`} alt={`${model} img`} />
             </div>
             <div className="flex flex-col gap-[20px]">
                 <div className="flex flex-col gap-[12px]">

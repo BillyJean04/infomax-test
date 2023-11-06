@@ -2,7 +2,7 @@ import { GetAllCarsQuery } from "../../../graphql/generated";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface FavoriteSlice {
-    favorited: Partial<GetAllCarsQuery["cars"]>;
+    favorited: GetAllCarsQuery["cars"];
 }
 
 const initialState: FavoriteSlice = {
