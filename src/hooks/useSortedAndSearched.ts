@@ -16,6 +16,9 @@ export const useSorted = (data: GetAllCarsQuery["cars"], sortMethod = "") => {
             case "newest": {
                 return data.sort((a, b) => b.model_year - a.model_year);
             }
+            case "oldest": {
+                return data.sort((a, b) => a.model_year - b.model_year);
+            }
             case "price.asc": {
                 return data.sort((a, b) => Number(a.price.slice(1)) - Number(b.price.slice(1)));
             }

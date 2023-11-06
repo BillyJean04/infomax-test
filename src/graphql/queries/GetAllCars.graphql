@@ -1,0 +1,13 @@
+query GetAllCars {
+    cars {
+        id
+        availability
+        brand
+        color
+        description
+        img_src
+        model
+        model_year
+        price
+    }
+}

@@ -24,20 +24,22 @@ const Card: FC<CardProps> = ({
     price,
     availability,
     isFavorite = false,
-    ...props
+    description,
 }) => {
     if (isFavorite) {
         return (
-            <div className="flex flex-row gap-[26px]">
+            <div className="flex flex-row gap-[26px] pb-[26px] border-b-[1px] border-gray2 last:border-none last:pb-0">
                 <div className="flex relative border-[1px] border-gray2 rounded-[15px]">
-                    <img className="max-w-full" src={img} alt={`${model} img`} />
+                    <img className="max-w-[445px]" src={img} alt={`${model} img`} />
                 </div>
                 <div className={`flex flex-col gap-[20px] justify-between`}>
-                    <div className="flex flex-col gap-[16px]">
+                    <div className="flex flex-col gap-[16px] max-w-[810px]">
                         <h3 className="font-medium text-h2 leading-h2">{model}</h3>
                         <div className="flex flex-col gap-[33px]">
                             <div className="flex flex-col gap-[16px]">
-                                <p className="text-gray3 text-p leading-p">{props.description}</p>
+                                <p className="text-gray3 text-p leading-p">
+                                    {description.length > 300 ? description.slice(0, 300) + "..." : description}
+                                </p>
                                 <p className="text-gray3 text-p leading-p">Год: {modelYear}</p>
                                 <p className="text-gray3 text-p leading-p">Цвет: {color}</p>
                             </div>
@@ -56,8 +58,8 @@ const Card: FC<CardProps> = ({
     }
 
     return (
-        <div className="flex items-center gap-[26px] flex-col justify-center sm:items-start">
-            <div className="flex relative border-[1px] border-gray2 rounded-t-[15px]">
+        <div className="flex items-start gap-[26px] flex-col justify-center sm:items-start">
+            <div className="flex relative border-gray2 border-[1px] rounded-t-[15px]">
                 {!availability && (
                     <Button
                         variant="default"
@@ -66,11 +68,17 @@ const Card: FC<CardProps> = ({
                         Нет в наличии
                     </Button>
                 )}
-                <img src={img} className={`${availability ? "" : "opacity-30"} w-full`} alt={`${model} img`} />
+                <img
+                    src={img}
+                    className={`${availability ? "" : "opacity-30"} w-full rounded-t-[15px]`}
+                    alt={`${model} img`}
+                />
             </div>
             <div className="flex flex-col gap-[20px]">
                 <div className="flex flex-col gap-[12px]">
-                    <h3 className="font-medium text-h3 leading-h3">{model}</h3>
+                    <h3 className="font-medium text-h3 leading-h3">
+                        {model.length > 34 ? model.slice(0, 28) + "..." : model}
+                    </h3>
                     <div className="flex flex-row gap-[14px]">
                         <p className="text-gray3 text-p leading-p">Год: {modelYear}</p>
                         <p className="text-gray3 text-p leading-p">Цвет: {color}</p>

@@ -20,7 +20,7 @@ export const useFavorite = (cardId: number) => {
             dispatch(deleteFavorite(cardId));
         } else {
             const filtered = data?.cars.filter((elem) => elem?.id === cardId);
-            dispatch(setFavorite(filtered));
+            dispatch(setFavorite(filtered ?? []));
         }
     };
 

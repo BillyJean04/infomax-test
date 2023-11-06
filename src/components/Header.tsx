@@ -3,7 +3,7 @@ import Button from "./ui/Button";
 
 const Header = () => {
     return (
-        <div className="flex flex-row py-[17px] px-[40px] border-b-gray2 border-[1px] mb-[56px]">
+        <div className="flex flex-row py-[17px] border-b-gray2 border-[1px] mb-[56px]">
             <div className="container mx-auto flex items-center justify-between">
                 <div className="flex flex-row gap-[20px]">
                     <Link to="/" className="flex items-center">
@@ -27,7 +27,7 @@ const Header = () => {
                         <span>Каталог</span>
                     </Button>
                 </div>
-                <div className="flex flex-row justify-between text-h4 font-[500] lg:gap-[145px]">
+                <div className=" flex flex-row  text-h4 font-[500] lg:gap-[145px]">
                     <div className="hidden xl:flex flex-row gap-[35px]">
                         <span className="flex">Москва, Волгоградский пр-кт, 43, стр 1</span>
                         <span className="flex">+7 800 555 35 35</span>

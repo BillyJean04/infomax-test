@@ -13,7 +13,7 @@ const DeleteButton: FC<DeleteButton> = ({ cardId }) => {
 
     return (
         <Button
-            className="flex"
+            className="flex p-[17px]"
             onClick={() => dispatch(deleteFavorite(cardId))}
             variant="delete"
             size="delete"
