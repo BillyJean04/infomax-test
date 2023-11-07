@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { ApolloProvider } from "../lib/ApolloProvider";
+import { BrowserRouter } from "react-router-dom";
 
 export const withRouter = (Component: FC) => () => (
-    <ApolloProvider>
+    <BrowserRouter>
         <Component />
-    </ApolloProvider>
+    </BrowserRouter>
 );

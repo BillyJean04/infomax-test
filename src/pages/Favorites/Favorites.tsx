@@ -5,6 +5,7 @@ import Container from "../../components/Container";
 
 const Favorites = () => {
     const { favorited } = useAppSelector((state) => state.favorite);
+
     return (
         <Container className="gap-[64px] font-inter pb-[40px]">
             <div className="flex flex-col gap-[26px] ">

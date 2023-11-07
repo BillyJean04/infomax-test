@@ -7,6 +7,7 @@ import Card from "../../components/Card";
 import { convertData } from "../../lib/utils";
 import GetAllCars from "../../graphql/queries/GetAllCars";
 import { GetAllCarsQuery } from "../../graphql/generated";
+import Container from "../../components/Container";
 
 const Cars = () => {
     const { data, loading, error } = useQuery<GetAllCarsQuery>(GetAllCars);
@@ -26,7 +27,7 @@ const Cars = () => {
 
     return (
         <div className="flex flex-col font-inter gap-[56px] pb-[40px]">
-            <div className="container mx-auto flex flex-col gap-[50px]">
+            <Container className="gap-[50px] font-inter">
                 <div className="flex flex-col gap-5 sm:flex-row  items-center justify-between">
                     <SortSelect sortMethod={sortMethod} setSortMethod={setSortMethod} />
                     <Search ref={inputRef} handleClick={handleClick} />
@@ -42,7 +43,7 @@ const Cars = () => {
                         )}
                     </div>
                 )}
-            </div>
+            </Container>
         </div>
     );
 };

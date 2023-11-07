@@ -7,9 +7,8 @@ import GetAllCars from "../graphql/queries/GetAllCars";
 
 export const useFavorite = (cardId: number) => {
     const { favorited } = useAppSelector((state) => state.favorite);
-    const { data } = useQuery<GetAllCarsQuery>(GetAllCars);
-
     const dispatch = useAppDispatch();
+    const { data } = useQuery<GetAllCarsQuery>(GetAllCars);
 
     const hasFavorited = useMemo(() => {
         return favorited.some((elem) => elem?.id === cardId);
@@ -19,7 +18,7 @@ export const useFavorite = (cardId: number) => {
         if (hasFavorited) {
             dispatch(deleteFavorite(cardId));
         } else {
-            const filtered = data?.cars.filter((elem) => elem?.id === cardId);
+            const filtered = data?.cars.filter(({ id }) => id === cardId);
             dispatch(setFavorite(filtered ?? []));
         }
     };
